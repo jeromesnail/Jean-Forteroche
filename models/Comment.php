@@ -41,8 +41,8 @@ class Comment extends Entry {
 
   public function setName(string $name) {
     // name can only contain letters, numbers, "_", "-" or "@"
-    $options = ['regexp' => '/^[\p{L}\d_\-@]{4,16}$/u'];
-    if (!filter_var($name, FILTER_VALIDATE_REGEXP, ['options' => $options])) {
+    $regexp = '/^[\p{L}\d_\-@]{4,16}$/u';
+    if (!preg_match($regexp, $name)) {
       throw new Exception('Invalid name format');
     }
     $this->_name = $name;

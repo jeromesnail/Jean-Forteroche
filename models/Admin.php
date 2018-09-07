@@ -28,8 +28,8 @@ class Admin extends Entry {
   // Setters
   public function setLogin(string $login) {
     // name can only contain letters or numbers
-    $options = ['regexp' => '/^[A-Za-z\d]{4,16}$/u'];
-    if (!filter_var($login, FILTER_VALIDATE_REGEXP, ['options' => $options])) {
+    $regexp = '/^[A-Za-z\d]{4,16}$/u';
+    if (!preg_match($regexp, $login)) {
       throw new Exception('Invalid login format');
     }
     $this->_login = $login;
