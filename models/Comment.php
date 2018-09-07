@@ -1,0 +1,73 @@
+<?php
+
+class Comment extends Entry {
+
+  // Private attributes
+  private $_postId,
+          $_name,
+          $_email,
+          $_message,
+          $_report;
+
+  // Getters
+  public function postId() {
+    return $this->_postId;
+  }
+
+  public function name() {
+    return $this->_name;
+  }
+
+  public function email() {
+    return $this->_email;
+  }
+
+  public function message() {
+    return $this->_message;
+  }
+
+  public function report() {
+    return $this->_report;
+  }
+
+  // Setters
+  public function setPostId(string $postId) {
+    $postId = (int) $postId;
+    if ($postId <= 0) {
+      throw new Exception('Invalid id');
+    }
+    $this->_postId = $postId;
+  }
+
+  public function setName(string $name) {
+    // name can only contain letters, numbers, "_", "-" or "@"
+    $options = ['regexp' => '/^[\p{L}\d_\-@]*$/u'];
+    if (!filter_var($name, FILTER_VALIDATE_REGEXP, ['options' => $options])) {
+      throw new Exception('Invalid name format');
+    }
+    $this->_name = $name;
+  }
+
+  public function setEmail(string $email) {
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+      throw new Exception('Invalid email');
+    }
+    $this->_email = $email;
+  }
+
+  public function setMessage (string $message) {
+    if (empty($message)) {
+      throw new Exception('Message cannot be empty');      
+    }
+    if (strlen($message) > 1000) {
+      throw new Exception('Message cannot exceed 1000 characters');      
+    }
+    $this->_message = $message;
+  }
+
+  public function setReport (string $report) {
+    $this->_report = filter_var($report, FILTER_VALIDATE_BOOLEAN);
+  }
+}
+
+// echo 'Comment loaded<br />';
