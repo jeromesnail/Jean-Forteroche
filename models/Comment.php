@@ -40,8 +40,8 @@ class Comment extends Entry {
   }
 
   public function setName(string $name) {
-    // name can only contain letters, numbers, "_", "-" or "@"
-    $regexp = '/^[\p{L}\d_\-@]{4,16}$/u';
+    // name can only contain between 4 and 16 word characters, including "@" and "-"
+    $regexp = '/^[\w@-]{4,16}$/';
     if (!preg_match($regexp, $name)) {
       throw new Exception('Invalid name format');
     }
