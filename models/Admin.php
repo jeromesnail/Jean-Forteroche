@@ -43,22 +43,10 @@ class Admin extends Entry {
   }
 
   public function setPassword(string $password) {
-    // password must contain at least one lowercase letter
-    $lowercase = preg_match('/[a-z]/', $password);
-    // it must contain at least on uppercase letter
-    $uppercase = preg_match('/[A-Z]/', $password);
-    // it must contain at least one number
-    $number = preg_match('/[0-9]/', $password);
-    // it must contain at least one special character
-    $special = preg_match('/[\W_]/', $password);
-    // Finally it must contain between 8 and 20 characters
-    $count = preg_match('/^.{8,20}$/', $password);
-    if ($lowercase AND $uppercase AND $number AND $special AND $count) {
-      $this->_password = $password;
+    if (strlen($password) <> 60) {
+      throw new Exception('Invalid password'); 
     }
-    else {
-      throw new Exception('Invalid password');      
-    }
+    $this->_password = $password;
   }
 
   public function setDisplayName(string $displayName) {
