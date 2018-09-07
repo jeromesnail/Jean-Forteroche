@@ -69,5 +69,3 @@ class Comment extends Entry {
     $this->_report = filter_var($report, FILTER_VALIDATE_BOOLEAN);
   }
 }
-
-// echo 'Comment loaded<br />';

@@ -46,5 +46,3 @@ abstract class Entry {
     $this->hydrate($data);
   }
 }
-
-// echo 'Entry loaded<br />';

@@ -56,5 +56,3 @@ class Admin extends Entry {
     $this->_displayName = $displayName;
   }
 }
-
-// echo 'Admin loaded<br />';

@@ -30,5 +30,3 @@ class Post extends Entry {
     $this->_editedAt = $editedAt;
   }
 }
-
-// echo 'Post loaded <br />';
