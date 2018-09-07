@@ -17,15 +17,17 @@ class Post extends Entry {
 
   // Setters
   public function setContent(string $content) {
-    if (is_string($content)) {
-      $this->_content = $content;
+    if (empty($content)) {
+      throw new Exception('Content cannot be empty');
     }
+    $this->_content = $content;
   }
 
   public function setEditedAt(string $editedAt) {
-    if (Manager::isDateFormatValid($editedAt)) {
-      $this->_editedAt = $editedAt;
+    if (!Manager::isDateFormatValid($editedAt)) {
+      throw new Exception('Invalid date format');      
     }
+    $this->_editedAt = $editedAt;
   }
 }
 

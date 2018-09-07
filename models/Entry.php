@@ -16,17 +16,19 @@ abstract class Entry {
   }
 
   // Setters
-  public function setId(int $id) {
+  public function setId(string $id) {
     $id = (int) $id;
-    if ($id > 0) {
-      $this->_id = $id;
+    if ($id <= 0) {
+      throw new Exception('Invalid id');
     }
+    $this->_id = $id;
   }
 
   public function setCreatedAt (string $createdAt) {
-    if (Manager::isDateFormatValid($createdAt)) {
-      $this->_createdAt = $createdAt;
+    if (!Manager::isDateFormatValid($createdAt)) {
+      throw new Exception('Invalid date format');
     }
+    $this->_createdAt = $createdAt;
   }
 
   // Hydrate
