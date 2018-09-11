@@ -7,7 +7,8 @@ class Comment extends Entry {
           $_name,
           $_email,
           $_message,
-          $_report;
+          $_report,
+          $moderatedAt;
 
   // Getters
   public function postId() {
@@ -28,6 +29,10 @@ class Comment extends Entry {
 
   public function report() {
     return $this->_report;
+  }
+
+  public function moderatedAt() {
+    return $this->_moderatedAt;
   }
 
   // Setters
@@ -67,5 +72,9 @@ class Comment extends Entry {
 
   public function setReport (string $report) {
     $this->_report = filter_var($report, FILTER_VALIDATE_BOOLEAN);
+  }
+
+  public function setModeratedAt($moderatedAt) {
+    $this->_moderatedAt = Manager::isDateFormatValid($moderatedAt) ? $moderatedAt : NULL;
   }
 }
