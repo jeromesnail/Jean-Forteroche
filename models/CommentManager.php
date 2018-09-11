@@ -47,11 +47,15 @@ class CommentManager extends Manager {
       ':id' => $id
     ]);
 
-    $comment = new Comment($req->fetch(PDO::FETCH_ASSOC));
+    $resp = $req->fetch(PDO::FETCH_ASSOC);
 
     $req->closeCursor();
 
-    return $comment;
+    if ($resp) {
+      return new Comment($resp);
+    } else {
+      throw new Exception('Could not find the comment by its id');      
+    }
   }
 
 
