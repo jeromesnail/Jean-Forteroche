@@ -1,5 +1,7 @@
 <?php
 
+namespace Model;
+
 abstract class Entry {
 
   // Private attributes

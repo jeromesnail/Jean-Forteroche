@@ -1,5 +1,7 @@
 <?php
 
+namespace Model;
+
 class Comment extends Entry {
 
   // Private attributes

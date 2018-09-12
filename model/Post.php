@@ -1,5 +1,7 @@
 <?php
 
+namespace Model;
+
 class Post extends Entry {
 
   // Private attributes

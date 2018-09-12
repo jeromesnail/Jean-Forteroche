@@ -1,12 +1,14 @@
 <?php
 
+namespace Model;
+
 class PostManager extends Manager {
 
   public function getPostCount() {
 
     $db = $this->dbConnect();
     $req = $db->query('SELECT COUNT(*) as postCount from posts');
-    $posts = $req->fetch(PDO::FETCH_ASSOC);
+    $posts = $req->fetch(\PDO::FETCH_ASSOC);
 
     $req->closeCursor();
 
@@ -22,7 +24,7 @@ class PostManager extends Manager {
       ':id' => $id
     ]);
 
-    $post = new Post($req->fetch(PDO::FETCH_ASSOC));
+    $post = new Post($req->fetch(\PDO::FETCH_ASSOC));
 
     $req->closeCursor();
 
@@ -35,7 +37,7 @@ class PostManager extends Manager {
     $db = $this->dbConnect();
     $req = $db->query('SELECT * from posts ORDER BY createdAt ' . $order . ' LIMIT ' . ($rank - 1) . ', 1');
     
-    $post = new Post ($req->fetch(PDO::FETCH_ASSOC));
+    $post = new Post ($req->fetch(\PDO::FETCH_ASSOC));
 
     $req->closeCursor();
 

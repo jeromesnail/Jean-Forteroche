@@ -1,5 +1,7 @@
 <?php
 
+namespace View;
+
 class View {
 
   // Private attributes
@@ -9,6 +11,7 @@ class View {
   
   // Setters
   private function setFile($file) {
+    echo $file;
     if (file_exists($file)) {
       $this->_file = $file;
     }
@@ -33,6 +36,6 @@ class View {
     ob_start();
     require($this->_file);
     $content = ob_get_clean();
-    require('template.php');
+    require('view/template.php');
   }
 }

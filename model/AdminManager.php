@@ -1,5 +1,7 @@
 <?php
 
+namespace Model;
+
 class AdminManager extends Manager {
 
   public function getAdmin() {

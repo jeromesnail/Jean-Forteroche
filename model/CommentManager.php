@@ -1,5 +1,7 @@
 <?php
 
+namespace Model;
+
 class CommentManager extends Manager {
 
   public function addComment(Comment $comment) {
@@ -29,7 +31,7 @@ class CommentManager extends Manager {
       ':postId' => $postId
     ]);
     
-    while($comment = $req->fetch(PDO::FETCH_ASSOC)) {
+    while($comment = $req->fetch(\PDO::FETCH_ASSOC)) {
       $comments[] = new Comment($comment);
     }
 
@@ -47,7 +49,7 @@ class CommentManager extends Manager {
       ':id' => $id
     ]);
 
-    $comment = new Comment($req->fetch(PDO::FETCH_ASSOC));
+    $comment = new Comment($req->fetch(\PDO::FETCH_ASSOC));
 
     $req->closeCursor();
 
@@ -62,7 +64,7 @@ class CommentManager extends Manager {
     $db = $this->dbConnect();
     $req = $db->query('SELECT * FROM comments WHERE report = 1');
 
-    while($report = $req->fetch(PDO::FETCH_ASSOC)) {
+    while($report = $req->fetch(\PDO::FETCH_ASSOC)) {
       $reports[] = new Comment($report);
     }
 

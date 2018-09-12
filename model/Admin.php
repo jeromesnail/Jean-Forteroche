@@ -1,5 +1,7 @@
 <?php
 
+namespace Model;
+
 class Admin extends Entry {
 
   // Private attributes
