@@ -3,7 +3,7 @@
 class Post extends Entry {
 
   // Private attributes
-  private $title,
+  private $_title,
           $_content,
           $_editedAt;
 
