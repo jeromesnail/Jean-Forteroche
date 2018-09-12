@@ -3,9 +3,11 @@ Blog of the writer Jean Forteroche
 
 # In construction
 
-## Things to do:
+## Things that works:
+- display a post and its comments
+- navigating through posts
+- adding a comment
 
-- define the tables of the database
-- define the PHP classes and their connections (models)
-- define the views
-- connecting the models to the views (controllers)
+## Next things to do:
+- add the report button on comments and make it functionnal
+- coding the back office (add, edit or delete a post, managing reports...)
