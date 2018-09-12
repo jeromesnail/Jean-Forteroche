@@ -15,6 +15,22 @@ class PostManager extends Manager {
     return $posts['postCount'];
   }
 
+  public function getPosts() {
+
+    $posts = [];
+
+    $db = $this->dbConnect();
+    $req = $db->query('SELECT * from posts ORDER BY createdAt');
+    
+    while ($post = $req->fetch(\PDO::FETCH_ASSOC)) {
+      $posts[] = new Post($post);
+    }
+
+    $req->closeCursor();
+
+    return $posts;
+  }
+
 
   public function getPostById(int $id) {
 
