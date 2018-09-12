@@ -22,7 +22,7 @@ class PostManager extends Manager {
       ':id' => $id
     ]);
 
-    $post = $req->fetch(PDO::FETCH_ASSOC);
+    $post = new Post($req->fetch(PDO::FETCH_ASSOC));
 
     $req->closeCursor();
 
@@ -35,7 +35,7 @@ class PostManager extends Manager {
     $db = $this->dbConnect();
     $req = $db->query('SELECT * from posts ORDER BY createdAt ' . $order . ' LIMIT ' . ($rank - 1) . ', 1');
     
-    $post = $req->fetch(PDO::FETCH_ASSOC);
+    $post = new Post ($req->fetch(PDO::FETCH_ASSOC));
 
     $req->closeCursor();
 
