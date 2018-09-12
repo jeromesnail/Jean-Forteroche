@@ -35,7 +35,16 @@ try {
       if (isset($_GET['rank']) && $_GET['rank'] > 0) {
         $front->displayPost($_GET['rank'], 'DESC');
       } else {
-        throw new Exception('Post rank invalid');
+        throw new \Exception('Post rank invalid');
+      }
+    }
+
+    // Add a comment
+    if ($_GET['action'] == 'addComment') {
+      if (isset($_POST['postId'], $_POST['postRank'], $_POST['name'], $_POST['email'], $_POST['message'])) {
+        $front->submitComment($_POST['postId'], $_POST['postRank'], $_POST['name'], $_POST['email'], $_POST['message']);
+      } else {
+        throw new \Exception('Missing data to add comment');
       }
     }
 
