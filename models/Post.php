@@ -23,7 +23,7 @@ class Post extends Entry {
     $this->_content = $content;
   }
 
-  public function setEditedAt($editedAt) {
+  public function setEditedAt(string $editedAt) {
     if (!Manager::isDateFormatValid($editedAt)) {
       throw new Exception('Invalid date format');      
     }

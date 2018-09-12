@@ -21,6 +21,6 @@ abstract class Manager {
   static function isDateFormatValid($date) {
     $format = 'Y-m-d H:i:s';
     $d = DateTime::createFromFormat($format, $date);
-    return $d && $d->format($format) == $date || $date == NULL;
+    return $d && $d->format($format) == $date;
   }
 }
