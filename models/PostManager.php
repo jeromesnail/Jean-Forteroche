@@ -22,15 +22,11 @@ class PostManager extends Manager {
       ':id' => $id
     ]);
 
-    $resp = $req->fetch(PDO::FETCH_ASSOC);
+    $post = $req->fetch(PDO::FETCH_ASSOC);
 
     $req->closeCursor();
 
-    if ($resp) {
-      return new Post($resp);
-    } else {
-      throw new Exception('Could not find the post by its id');      
-    }
+    return $post;
   }
 
 
@@ -39,15 +35,11 @@ class PostManager extends Manager {
     $db = $this->dbConnect();
     $req = $db->query('SELECT * from posts ORDER BY createdAt ' . $order . ' LIMIT ' . ($rank - 1) . ', 1');
     
-    $resp = $req->fetch(PDO::FETCH_ASSOC);
+    $post = $req->fetch(PDO::FETCH_ASSOC);
 
     $req->closeCursor();
 
-    if ($resp) {
-      return new Post($resp);
-    } else {
-      throw new Exception('Could not find the post by its rank');      
-    }
+    return $post;
   }
 
 
