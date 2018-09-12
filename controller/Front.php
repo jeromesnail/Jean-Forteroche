@@ -36,4 +36,22 @@ class Front {
 
     $view->output();
   }
+
+  public function submitComment($postId, $postRank, $name, $email, $message) {
+    $commentManager = new \Model\CommentManager();
+
+    $comment = new \Model\Comment([
+      'postId' => $postId,
+      'name' => $name,
+      'email' => $email,
+      'message' => $message
+    ]);
+
+    $affectedLines = $commentManager->addComment($comment);
+    if ($affectedLines) {
+      header('Location: index.php?action=displayPost&rank=' . $postRank);
+    } else {
+      throw new \Exception('Database error, could not add the comment');      
+    }
+  }
 }
