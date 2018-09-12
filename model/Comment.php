@@ -41,7 +41,7 @@ class Comment extends Entry {
   public function setPostId(string $postId) {
     $postId = (int) $postId;
     if ($postId <= 0) {
-      throw new Exception('Invalid id');
+      throw new \Exception('Invalid id');
     }
     $this->_postId = $postId;
   }
@@ -50,24 +50,24 @@ class Comment extends Entry {
     // name can only contain between 4 and 16 word characters, including "@" and "-"
     $regexp = '/^[\w@-]{4,16}$/';
     if (!preg_match($regexp, $name)) {
-      throw new Exception('Invalid name format');
+      throw new \Exception('Invalid name format');
     }
     $this->_name = $name;
   }
 
   public function setEmail(string $email) {
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-      throw new Exception('Invalid email');
+      throw new \Exception('Invalid email');
     }
     $this->_email = $email;
   }
 
   public function setMessage (string $message) {
     if (empty($message)) {
-      throw new Exception('Message cannot be empty');      
+      throw new \Exception('Message cannot be empty');      
     }
     if (strlen($message) > 1000) {
-      throw new Exception('Message cannot exceed 1000 characters');      
+      throw new \Exception('Message cannot exceed 1000 characters');      
     }
     $this->_message = $message;
   }
