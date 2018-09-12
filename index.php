@@ -14,10 +14,20 @@ function autoload($class) {
         require_once($file);
     }
 }
+
 spl_autoload_register('autoload');
 
 
 // ROUTER
 $front = new Controller\Front();
+$back = new Controller\Back();
 
-$front->displayPost(1,''); // <- test
+try {
+  if (isset($_GET['action'])) {
+
+  } else {
+    $front->displayPost(1, 'DESC');
+  }
+} catch(Exception $e) {
+  echo 'Erreur : ' . $e->getMessage();
+}
