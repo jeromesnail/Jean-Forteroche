@@ -11,7 +11,6 @@ class View {
   
   // Setters
   private function setFile($file) {
-    echo $file;
     if (file_exists($file)) {
       $this->_file = $file;
     }
