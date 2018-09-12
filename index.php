@@ -18,12 +18,26 @@ function autoload($class) {
 spl_autoload_register('autoload');
 
 
-// ROUTER
+// Router
 $front = new Controller\Front();
 $back = new Controller\Back();
 
 try {
   if (isset($_GET['action'])) {
+    
+    // Display post list
+    if ($_GET['action'] == 'postList') {
+      $front->displayPostList();
+    }
+
+    // Display post by rank order
+    if ($_GET['action'] == 'displayPost') {
+      if (isset($_GET['rank']) && $_GET['rank'] > 0) {
+        $front->displayPost($_GET['rank'], 'DESC');
+      } else {
+        throw new Exception('Post rank invalid');
+      }
+    }
 
   } else {
     $front->displayPost(1, 'DESC');
