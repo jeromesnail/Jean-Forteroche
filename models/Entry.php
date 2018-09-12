@@ -42,7 +42,9 @@ abstract class Entry {
   }
 
   // Constructor
-  public function __construct(array $data) {
-    $this->hydrate($data);
+  public function __construct($data) {
+    if (is_array($data)) {
+      $this->hydrate($data);
+    }
   }
 }
