@@ -1,19 +1,33 @@
 <?php
 $previousAttribute = $postRank > 1 ?
-  'href="index.php?action=displayPost&rank=' . ($postRank - 1) . '" class="col-4 btn btn-outline-primary"' :
-  'href="#" class="col-4 btn btn-outline-primary disabled"';
+  'href="index.php?action=displayPost&rank=' . ($postRank - 1) . '&order=' . $order . '" class="col-1 btn btn-outline-primary"' :
+  'href="#" class="col-1 btn btn-outline-primary disabled"';
 
 $nextAttribute = $postRank < $postCount ?
-  'href="index.php?action=displayPost&rank=' . ($postRank + 1) . '" class="col-4 btn btn-outline-primary"' :
-  'href="#" class="col-4 btn btn-outline-primary disabled"';
+  'href="index.php?action=displayPost&rank=' . ($postRank + 1) . '&order=' . $order . '" class="col-1 btn btn-outline-primary"' :
+  'href="#" class="col-1 btn btn-outline-primary disabled"';
+
+if ($order == 'ASC') {
+  $newOrder = 'DESC';
+  $filterText = 'Les plus anciens en premier';
+} else {
+  $newOrder = 'ASC';
+  $filterText = 'Les plus récents en premier';
+}
 ?>
 
 <section id="post">
   <div class="row text-center">
+    <a href="index.php?action=displayPost&rank=<?= $postRank ?>&order=<?= $newOrder ?>" class="col-5 btn btn-outline-success">
+      <?= $filterText ?>
+    </a>
+    <div class="col-3"></div>
     <a <?= $previousAttribute ?>>
       <i class="fas fa-angle-double-left"></i>
     </a>
-    <div class="col-4">Page <?= $postRank ?>/<?= $postCount ?></div>
+    <div class="col-2">
+      Page <?= $postRank ?>/<?= $postCount ?>
+    </div>
     <a <?= $nextAttribute ?>>
       <i class="fas fa-angle-double-right"></i>
     </a>
@@ -29,10 +43,16 @@ $nextAttribute = $postRank < $postCount ?
   <h2>Commentaires:</h2>
   <?php
   foreach ($comments as $comment) {
+    $dateTime = new DateTime($comment->createdAt());
   ?>
   <div>
-    <p><?= $comment->name() ?> a dit :</p>
-    <p><?= $comment->message() ?></p>
+    <p>
+      Message de <strong><?= htmlspecialchars($comment->name()) ?></strong>
+      <em>le <?= $dateTime->format('d/m/Y à H\hi\ms\s') ?></em>
+      <a href="index.php?action=report&commentId=<?= $comment->id() ?>&postRank=<?= $postRank ?>&order=<?= $order ?>" class="btn btn-sm btn-danger">
+        <i class="far fa-flag"></i>
+      </a></p>
+    <p><?= htmlspecialchars($comment->message()) ?></p>
   </div>
   <?
   }
