@@ -64,6 +64,7 @@ if ($order == 'ASC') {
   <form action="index.php?action=addComment" method="post">
     <input type="hidden" name="postId" value="<?= $post->id() ?>" >
     <input type="hidden" name="postRank" value="<?= $postRank ?>" >
+    <input type="hidden" name="order" value="<?= $order ?>" >
     <div class="form-group">
       <label for="name">Votre nom :</label>
       <input class="form-control" id="name" name="name" placeholder="Lettre et chiffres uniquement" type="text" />
