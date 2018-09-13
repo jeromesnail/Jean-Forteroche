@@ -57,6 +57,19 @@ class CommentManager extends Manager {
   }
 
 
+  public function addReport(int $id) {
+
+    $db = $this->dbConnect();
+    $req = $db->prepare('UPDATE comments SET report = 1 WHERE id = :id');
+    $affectedLines = $req->execute([
+      ':id' => $id
+    ]);
+    
+    $req->closeCursor();
+
+    return $affectedLines;
+  }
+
   public function getReports() {
 
     $reports = [];
