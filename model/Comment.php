@@ -77,6 +77,6 @@ class Comment extends Entry {
   }
 
   public function setModeratedAt($moderatedAt) {
-    $this->_moderatedAt = Manager::isDateFormatValid($moderatedAt) ? $moderatedAt : NULL;
+    $this->_moderatedAt = \Utils\Tools::isDateFormatValid($moderatedAt) ? $moderatedAt : NULL;
   }
 }
