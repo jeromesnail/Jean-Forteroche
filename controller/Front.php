@@ -15,6 +15,7 @@ class Front {
     $view = new \View\View('view/front/postView.php', [
       'title' => $post->title(),
       'postRank' => $rank,
+      'order' => $order,
       'postCount' => $postCount,
       'post' => $post,
       'comments' => $comments
@@ -37,7 +38,7 @@ class Front {
     $view->output();
   }
 
-  public function submitComment($postId, $postRank, $name, $email, $message) {
+  public function submitComment($postId, $postRank, $order, $name, $email, $message) {
     $commentManager = new \Model\CommentManager();
 
     $comment = new \Model\Comment([
@@ -49,9 +50,20 @@ class Front {
 
     $affectedLines = $commentManager->addComment($comment);
     if ($affectedLines) {
-      header('Location: index.php?action=displayPost&rank=' . $postRank);
+      header('Location: index.php?action=displayPost&rank=' . $postRank . '&order=' . $order);
     } else {
-      throw new \Exception('Database error, could not add the comment');      
+      throw new \Exception('Database error, could not add the comment');
+    }
+  }
+
+  public function submitReport($commentId, $postRank, $order) {
+    $commentManager = new \Model\CommentManager();
+
+    $affectedLines = $commentManager->addReport($commentId);
+    if ($affectedLines) {
+      header('Location: index.php?action=displayPost&rank=' . $postRank . '&order=' . $order);
+    } else {
+      throw new \Exception('Database error, could not report the comment');
     }
   }
 }
