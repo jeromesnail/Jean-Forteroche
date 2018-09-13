@@ -2,15 +2,16 @@
 
 namespace Controller;
 
-class Front {
+class PostController {
 
   public function displayPost(int $rank, string $order) {
     $postManager = new \Model\PostManager();
-    $commentManager = new \Model\CommentManager();
 
     $postCount = $postManager->getPostCount();
     $post = $postManager->getPostByRank($rank, $order);
-    $comments = $commentManager->getComments($post->id());
+
+    $commentController = new CommentController();
+    $comments = $commentController->displayComments($post->id());
 
     $view = new \View\View('view/front/postView.php', [
       'title' => $post->title(),
