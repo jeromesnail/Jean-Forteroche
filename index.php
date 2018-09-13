@@ -33,7 +33,8 @@ try {
     // Display post by rank order
     if ($_GET['action'] == 'displayPost') {
       if (isset($_GET['rank']) && $_GET['rank'] > 0) {
-        $front->displayPost($_GET['rank'], 'DESC');
+        $order = (isset($_GET['order']) && $_GET['order'] == 'ASC') ? 'ASC' : 'DESC';
+        $front->displayPost($_GET['rank'], $order);
       } else {
         throw new \Exception('Post rank invalid');
       }
@@ -41,14 +42,22 @@ try {
 
     // Add a comment
     if ($_GET['action'] == 'addComment') {
-      if (isset($_POST['postId'], $_POST['postRank'], $_POST['name'], $_POST['email'], $_POST['message'])) {
-        $front->submitComment($_POST['postId'], $_POST['postRank'], $_POST['name'], $_POST['email'], $_POST['message']);
+      if (isset($_POST['postId'], $_POST['postRank'], $_POST['order'], $_POST['name'], $_POST['email'], $_POST['message'])) {
+        $front->submitComment($_POST['postId'], $_POST['postRank'], $_POST['order'], $_POST['name'], $_POST['email'], $_POST['message']);
       } else {
         throw new \Exception('Missing data to add comment');
       }
     }
 
+    // Report a comment
+    if ($_GET['action'] == 'report') {
+      if (isset($_GET['commentId'], $_GET['postRank'], $_GET['order'])) {
+        $front->submitReport($_GET['commentId'], $_GET['postRank'], $_GET['order']);
+      } else throw new Exception('Missing data to report comment'); 
+    }
+
   } else {
+    // Displaying last post by default
     $front->displayPost(1, 'DESC');
   }
 } catch(Exception $e) {
