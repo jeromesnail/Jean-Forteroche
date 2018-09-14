@@ -7,7 +7,12 @@ Blog of the writer Jean Forteroche
 - display a post and its comments
 - navigating through posts
 - adding a comment
+- report a comment
+- login / session / cookies
+- url rewriting for login
+- adding a post
 
 ## Next things to do:
-- add the report button on comments and make it functionnal
-- coding the back office (add, edit or delete a post, managing reports...)
+- implement TinyMCE
+- manage updating and deleting a post
+- manage reports
