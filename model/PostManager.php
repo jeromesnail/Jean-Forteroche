@@ -64,9 +64,10 @@ class PostManager extends Manager {
   public function addPost(Post $post) {
 
     $db = $this->dbConnect();
-    $req = $db->prepare('INSERT INTO posts(createdAt, content) VALUES(NOW(), :content)');
+    $req = $db->prepare('INSERT INTO posts(createdAt, title, content) VALUES(NOW(), :title, :content)');
     $affectedLines = $req->execute([
-      ':content' => $post->content()
+      ':content' => $post->content(),
+      ':title' => $post->title()
     ]);
 
     $req->closeCursor();
