@@ -10,8 +10,8 @@ class PostController {
     $postCount = $postManager->getPostCount();
     $post = $postManager->getPostByRank($rank, $order);
 
-    $commentController = new CommentController();
-    $comments = $commentController->displayComments($post->id());
+    $commentManager = new \Model\CommentManager();
+    $comments = $commentManager->getComments($post->id());
 
     $view = new \View\View('view/front/postView.php', [
       'title' => $post->title(),

@@ -3,12 +3,6 @@
 namespace Controller;
 
 class CommentController {
-
-  public function displayComments(int $postId) {
-    $commentManager = new \Model\CommentManager();
-
-    return $commentManager->getComments($postId);
-  }
   
   public function submitComment($postId, $postRank, $order, $name, $email, $message) {
     $commentManager = new \Model\CommentManager();
