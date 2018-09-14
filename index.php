@@ -51,6 +51,20 @@ try {
       }
     }
 
+    // New post
+    if ($_GET['action'] == 'newPost') {
+      $postController = new \Controller\PostController();
+      $postController->newPost();
+    }
+
+    // Add new post
+    if ($_GET['action'] == 'submitPost') {
+      if (isset($_POST['title'], $_POST['content'])) {
+        $postController = new \Controller\PostController();
+        $postController->submitPost($_POST['title'], $_POST['content']);
+      }
+    }
+
     // Add a comment
     if ($_GET['action'] == 'addComment') {
       if (isset($_POST['postId'], $_POST['postRank'], $_POST['order'], $_POST['name'], $_POST['email'], $_POST['message'])) {
@@ -80,10 +94,10 @@ try {
       $adminController->displayLogin();
     }
 
-    if ($_GET['action'] == 'loginPost') {
+    if ($_GET['action'] == 'submitLogin') {
       if (isset($_POST['login'], $_POST['password'])) {
         $adminController = new \Controller\AdminController();
-        $adminController->checkLogin($_POST['login'], $_POST['password'], isset($_POST['remember']));
+        $adminController->submitLogin($_POST['login'], $_POST['password'], isset($_POST['remember']));
       }
     }
 

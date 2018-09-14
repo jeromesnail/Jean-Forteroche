@@ -25,7 +25,6 @@ class PostController {
     $view->output();
   }
 
-
   public function displayPostList() {
     $postManager = new \Model\PostManager();
 
@@ -37,5 +36,28 @@ class PostController {
     ]);
 
     $view->output();
+  }
+
+  public function newPost() {
+    $view = new \View\View('view/back/newPostView.php', [
+      'title' => 'Nouveau chapitre'
+    ]);
+
+    $view->output();
+  }
+
+  public function submitPost($title, $content) {
+    $postManager = new \Model\PostManager();
+    $post = new \Model\Post([
+      'title' => $title,
+      'content' => $content
+    ]);
+
+    $affectedLines = $postManager->addPost($post);
+    if ($affectedLines) {
+      header('Location: index.php?action=displayPost&rank=1');
+    } else {
+      throw new \Exception('Database error, could not add the post');
+    }
   }
 }
