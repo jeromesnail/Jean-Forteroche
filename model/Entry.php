@@ -21,14 +21,14 @@ abstract class Entry {
   public function setId(string $id) {
     $id = (int) $id;
     if ($id <= 0) {
-      throw new Exception('Invalid id');
+      throw new \Exception('Invalid id');
     }
     $this->_id = $id;
   }
 
   public function setCreatedAt (string $createdAt) {
-    if (!Manager::isDateFormatValid($createdAt)) {
-      throw new Exception('Invalid date format');
+    if (!\Utils\Tools::isDateFormatValid($createdAt)) {
+      throw new \Exception('Invalid date format');
     }
     $this->_createdAt = $createdAt;
   }
