@@ -18,6 +18,17 @@ function autoload($class) {
 spl_autoload_register('autoload');
 
 
+// Sessions
+session_start();
+if (isset($_COOKIE['login']) && !isset($_SESSION['displayName'])) {
+  $adminController = new \Controller\AdminController;
+  $isAdmin = $adminController->checkCookie($_COOKIE['login']);
+  if ($isAdmin) {
+    $_SESSION['displayName'] = $isAdmin;
+  }
+}
+
+
 // Router
 
 try {
@@ -56,6 +67,24 @@ try {
         $commentController = new \Controller\CommentController();
         $commentController->submitReport($_GET['commentId'], $_GET['postRank'], $_GET['order']);
       } else throw new Exception('Missing data to report comment'); 
+    }
+
+    // Authentification
+    if ($_GET['action'] == 'login') {
+      $adminController = new \Controller\AdminController();
+      if (isset($_SESSION['displayName'])) {
+        session_unset();
+        session_destroy();
+        setcookie('login', '', 1);
+      }
+      $adminController->displayLogin();
+    }
+
+    if ($_GET['action'] == 'loginPost') {
+      if (isset($_POST['login'], $_POST['password'])) {
+        $adminController = new \Controller\AdminController();
+        $adminController->checkLogin($_POST['login'], $_POST['password'], isset($_POST['remember']));
+      }
     }
 
   } else {
