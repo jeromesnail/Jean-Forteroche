@@ -30,11 +30,19 @@ class View {
 
 
   public function output() {
+    if (isset($_SESSION['displayName'])) {
+      ob_start();
+      require_once('view/back/navView.php');
+      $nav = ob_get_clean();
+    } else {
+      $nav = '';
+    }
+    
     extract($this->_data);
-
     ob_start();
     require($this->_file);
     $content = ob_get_clean();
-    require('view/template.php');
+
+    require_once('view/template.php');
   }
 }
