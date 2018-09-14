@@ -9,7 +9,7 @@ class AdminManager extends Manager {
     $db = $this->dbConnect();
     $req = $db->query('SELECT * FROM admin ORDER BY createdAt DESC');
 
-    $admin = new Admin($req->fetch(PDO::FETCH_ASSOC));
+    $admin = new Admin($req->fetch(\PDO::FETCH_ASSOC));
 
     $req->closeCursor();
 
