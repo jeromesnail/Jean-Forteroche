@@ -4,7 +4,7 @@ namespace Controller;
 
 class AdminController {
 
-  public function checkLogin($login, $password, $remember) {
+  public function submitLogin($login, $password, $remember) {
     $adminManager = new \Model\AdminManager();
 
     $admin = $adminManager->getAdmin();
